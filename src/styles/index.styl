@@ -1,0 +1,42 @@
+.container
+  display flex
+  min-height 100vh
+  flex-direction column
+  .content
+    flex 1
+    padding 15px
+    width 100%
+    max-width 1400px
+    margin 0 auto
+    box-sizing border-box
+
+h2, h4
+  display inline-block
+  margin 0
+  font-family Roboto, sans-serif
+  text-transform uppercase
+  vertical-align top
+  &.select-label
+    margin-top 25px
+.action-wrap
+  display flex
+  flex-direction row
+  padding 15px 0
+  & > div
+    flex 0 0 50%
+.total-wrap
+  display flex
+  justify-content flex-end
+  h4
+    flex 0 0 50%
+    display flex
+.add-button
+  text-align right
+.empty-list
+  height 290px !important
+  & > td
+    text-align center !important
+form
+  max-width 320px
+  width 100%
+  margin 0 auto

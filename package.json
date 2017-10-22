@@ -1,0 +1,31 @@
+{
+  "name": "invoices-test-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "1.15.0",
+    "cors": "^2.8.4",
+    "custom-react-scripts": "0.2.1",
+    "express": "~4.13.4",
+    "lodash": "latest",
+    "material-ui": "^0.19.4",
+    "mobx": "^3.3.1",
+    "mobx-react": "^4.3.3",
+    "normalize.css": "^7.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-router": "^3.0.2",
+    "sequelize": "^3.20.0",
+    "sqlite3": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "prop-types": "latest"
+  }
+}
