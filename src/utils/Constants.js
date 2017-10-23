@@ -49,6 +49,10 @@ export const routeURLs = {
     link: '/customers',
     route: 'customers',
   },
+  about: {
+    link: '/about',
+    route: 'about',
+  },
   error: {
     link: '/404',
     route: '404',

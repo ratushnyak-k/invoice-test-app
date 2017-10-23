@@ -3,7 +3,6 @@ import {
   inject,
   observer,
 } from 'mobx-react'
-import { string } from 'prop-types'
 
 import List from '../shared/List'
 import EditButton from '../shared/buttons/EditButton'

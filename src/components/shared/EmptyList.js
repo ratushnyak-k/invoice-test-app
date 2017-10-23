@@ -5,10 +5,6 @@ import {
 } from 'material-ui'
 
 
-const propTypes = {}
-
-const defaultProps = {}
-
 const EmptyList = () => {
 
   return (
@@ -22,5 +18,3 @@ const EmptyList = () => {
 
 
 export default EmptyList
-EmptyList.propTypes = propTypes
-EmptyList.defaultProps = defaultProps

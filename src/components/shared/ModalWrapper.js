@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  inject,
   observer,
 } from 'mobx-react'
 import {
@@ -22,11 +21,5 @@ class ModalWrapper extends React.Component {
     )
   }
 }
-
-ModalWrapper.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-ModalWrapper.defaultProps = {}
 
 export default ModalWrapper

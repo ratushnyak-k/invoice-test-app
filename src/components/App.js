@@ -7,6 +7,7 @@ import {
   AppBar,
   BottomNavigation,
   BottomNavigationItem,
+  FlatButton,
   Paper,
 } from 'material-ui'
 
@@ -19,15 +20,18 @@ import CreateProductForm from './shared/forms/CreateProductForm'
 import CreateCustomerForm from './shared/forms/CreateCustomerForm'
 
 @inject('modalStore')
+@inject('customerStore')
+@inject('productStore')
 @observer
 class App extends React.Component {
   constructor() {
     super()
-    const {invoices, customers, products} = routeURLs
+    const {invoices, customers, products, about} = routeURLs
     this.navConfig = [invoices.link, customers.link, products.link]
     this.navigateToInvoices = this.navigateTo.bind(this, invoices.link)
     this.navigateToCustomers = this.navigateTo.bind(this, customers.link)
     this.navigateToProducts = this.navigateTo.bind(this, products.link)
+    this.navigateToAbout = this.navigateTo.bind(this, about.link)
   }
 
   navigateTo(route) {
@@ -41,6 +45,10 @@ class App extends React.Component {
         <AppBar
           title="Invoices Test App"
           showMenuIconButton={false}
+          iconElementRight={<FlatButton
+            label="About the project"
+            onClick={this.navigateToAbout}
+          />}
         />
         <div className="content">{this.props.children}</div>
         <ModalWrapper
@@ -48,13 +56,13 @@ class App extends React.Component {
           title="Create Product"
           onClose={this.props.modalStore.toggleModal.bind(this, 'isOpenProduct', false)}
         >
-          <CreateProductForm />
+          <CreateProductForm data={this.props.productStore.editableProductObject}/>
         </ModalWrapper>
         <ModalWrapper
           open={this.props.modalStore.isOpenCustomer}
           title="Create Customer"
           onClose={this.props.modalStore.toggleModal.bind(this, 'isOpenCustomer', false)}>
-          <CreateCustomerForm />
+          <CreateCustomerForm data={this.props.customerStore.editableCustomerObject}/>
         </ModalWrapper>
         <Paper>
           <BottomNavigation selectedIndex={this.navConfig.indexOf(pathname)}>
@@ -79,11 +87,5 @@ class App extends React.Component {
     )
   }
 }
-
-App.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-App.defaultProps = {}
 
 export default App

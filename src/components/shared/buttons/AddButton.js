@@ -1,14 +1,8 @@
 import React from 'react'
 import {
-  FloatingActionButton,
   RaisedButton,
 } from 'material-ui'
 import ContentAdd from 'material-ui/svg-icons/content/add'
-
-
-const propTypes = {}
-
-const defaultProps = {}
 
 const AddButton = ({title, onAdd, className}) => {
 
@@ -26,5 +20,3 @@ const AddButton = ({title, onAdd, className}) => {
 
 
 export default AddButton
-AddButton.propTypes = propTypes
-AddButton.defaultProps = defaultProps

@@ -20,12 +20,15 @@
     "sqlite3": "latest"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "react-scripts start",
+    "start": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
     "prop-types": "latest"
+  },
+  "engines": {
+    "node": "6.2.0"
   }
 }

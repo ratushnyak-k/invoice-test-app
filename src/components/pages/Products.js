@@ -3,24 +3,24 @@ import {
   inject,
   observer,
 } from 'mobx-react'
-import { string } from 'prop-types'
 
 import List from '../shared/List'
 import EditButton from '../shared/buttons/EditButton'
-import { routeURLs } from '../../utils/Constants'
 
 @inject('mainStore')
 @inject('modalStore')
+@inject('productStore')
 @observer
 class Products extends React.Component {
   onAdd() {
+    this.props.productStore.setVariable('idOfEditProduct', '')
     this.props.modalStore.toggleModal('isOpenProduct', true)
   }
 
-  onEdit() {
-
+  onEdit(id) {
+    this.props.productStore.setVariable('idOfEditProduct', id)
+    this.props.modalStore.toggleModal('isOpenProduct', true)
   }
-
   render() {
     return (
       <List

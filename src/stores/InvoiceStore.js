@@ -17,15 +17,19 @@ export class InvoiceStore {
 
   @observable currentInvoiceId
   @observable currentCustomerId
-  @observable currentDiscount = 0
+  @observable currentDiscount
 
   @action.bound
   async fetchInvoicesDetail(id) {
     try {
       const response = await API.getData(ApiRoutes.invoices.item(id))
+      if (!response.data) {
+        return {
+          error: true
+        }
+      }
       this.setVariable('currentCustomerId', response.data.customer_id)
-      this.setVariable('currentDiscount', +response.data.discount)
-
+      this.setVariable('currentDiscount', response.data.discount)
     } catch (error) {
       Logger.error(error)
     }

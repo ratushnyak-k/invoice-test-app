@@ -3,17 +3,21 @@ import {
   inject,
   observer,
 } from 'mobx-react'
-import { number } from 'prop-types'
 
 import Select from '../shared/formComponents/Select'
 import List from '../shared/List'
 import DeleteButton from '../shared/buttons/DeleteButton'
 import AddButton from '../shared/buttons/AddButton'
-import { discounts } from '../../utils/Constants'
+import {
+  discounts,
+  routeURLs,
+} from '../../utils/Constants'
 
 @inject('mainStore')
 @inject('invoiceStore')
 @inject('modalStore')
+@inject('customerStore')
+@inject('productStore')
 @observer
 class InvoiceCreate extends React.Component {
   componentWillMount() {
@@ -21,10 +25,14 @@ class InvoiceCreate extends React.Component {
   }
 
   componentDidMount() {
-    this.props.invoiceStore.fetchInvoicesDetail(this.invoiceId)
+    this.props.invoiceStore.fetchInvoicesDetail(this.invoiceId).then(res => {
+        if (res && res.error) {
+          this.props.router.replace(routeURLs.error.link)
+        }
+      }
+    )
     this.props.mainStore.fetchList('customers')
     this.props.mainStore.fetchList('products')
-
   }
 
   onCustomerChange(customer_id) {
@@ -44,9 +52,6 @@ class InvoiceCreate extends React.Component {
 
   onQuantityChange(itemId, quantity) {
     this.props.invoiceStore.onQuantityChange(itemId, quantity)
-  }
-
-  onQuantityBlur(itemId, quantity) {
     this.props.invoiceStore.updateInvoiceItem(this.invoiceId, itemId, {quantity})
   }
 
@@ -59,10 +64,12 @@ class InvoiceCreate extends React.Component {
   }
 
   createCustomer() {
+    this.props.customerStore.setVariable('idOfEditCustomer', '')
     this.props.modalStore.toggleModal('isOpenCustomer', true)
   }
 
   createProduct() {
+    this.props.productStore.setVariable('idOfEditProduct', '')
     this.props.modalStore.toggleModal('isOpenProduct', true)
   }
 
@@ -88,10 +95,9 @@ class InvoiceCreate extends React.Component {
           entity="invoiceItems"
           param={this.invoiceId}
 
-          textFieldData={{
+          counterData={{
             idKey: 'quantity',
             onChange: this.onQuantityChange.bind(this),
-            onBlur: this.onQuantityBlur.bind(this),
           }}
 
           selectData={{
@@ -114,7 +120,6 @@ class InvoiceCreate extends React.Component {
             <h4 className="select-label">Discount:</h4>
             <Select
               defaultOptionName="Choose the discount"
-              defaultOptionValue={0}
               dropDownItems={discounts}
               onChange={::this.onDiscountChange}
               value={this.props.invoiceStore.currentDiscount}
@@ -126,11 +131,5 @@ class InvoiceCreate extends React.Component {
     )
   }
 }
-
-InvoiceCreate.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-InvoiceCreate.defaultProps = {}
 
 export default InvoiceCreate

@@ -2,12 +2,6 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import { observer } from 'mobx-react'
 
-const propTypes = {}
-
-const defaultProps = {
-  type: 'text'
-}
-
 @observer
 class Input extends React.Component {
 
@@ -25,7 +19,7 @@ class Input extends React.Component {
       <div className={className}>
         <TextField
           style={{width: '100%'}}
-          type={type}
+          type={type || 'text'}
           errorText={isTouched && errors[0]} // zero index means that is first priority error
           floatingLabelText={label}
           onChange={this.onChange}
@@ -35,8 +29,5 @@ class Input extends React.Component {
     )
   }
 }
-
-Input.propTypes = propTypes
-Input.defaultProps = defaultProps
 
 export default Input

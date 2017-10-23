@@ -22,6 +22,11 @@ export class InvoiceItem {
     this.quantity = data.quantity || 0
     this.updatedAt = data.updatedAt
   }
+
+  @action
+  update(key, data) {
+    this[key] = data
+  }
 }
 
 export default InvoiceItem

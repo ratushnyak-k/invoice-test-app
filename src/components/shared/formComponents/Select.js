@@ -27,15 +27,15 @@ class Select extends React.Component {
       actionTitle,
       action,
       defaultOptionName,
-      defaultOptionValue,
     } = this.props
+
     return (
       <DropDownMenu
         value={value}
         onChange={::this.onChange}
       >
         <MenuItem
-          value={defaultOptionValue || null}
+          value={null}
           primaryText={defaultOptionName}
         />
         {
@@ -63,11 +63,5 @@ class Select extends React.Component {
     )
   }
 }
-
-Select.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-Select.defaultProps = {}
 
 export default Select

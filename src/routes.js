@@ -10,6 +10,7 @@ import Invoices from './components/pages/Invoices'
 import InvoiceCreate from './components/pages/InvoiceCreate'
 import Products from './components/pages/Products'
 import Customers from './components/pages/Customers'
+import About from './components/pages/About'
 import ErrorPage from './components/pages/ErrorPage'
 import {
   routeURLs,
@@ -36,6 +37,11 @@ const routes = (
     <Route
       path={routeURLs.customers.route}
       component={Customers}
+    />
+
+    <Route
+      path={routeURLs.about.route}
+      component={About}
     />
 
     <Route path={routeURLs.error.route} component={ErrorPage} />

@@ -1,18 +1,11 @@
 import React from 'react';
 
-
-const propTypes = {};
-
-const defaultProps = {};
-
-const ErrorPage = (props) => {
+const ErrorPage = () => {
 
   return (
-    <div>404</div>
+    <h1>Error: 404</h1>
   );
 };
 
 
 export default ErrorPage;
-ErrorPage.propTypes = propTypes;
-ErrorPage.defaultProps = defaultProps;

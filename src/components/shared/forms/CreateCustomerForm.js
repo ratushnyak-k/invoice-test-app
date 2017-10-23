@@ -13,22 +13,23 @@ import { validationErrors as errors } from '../../../utils/helpers'
 @inject('modalStore')
 @observer
 class CreateCustomerForm extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    const {data} = this.props
     this.form = new FieldsGroup({
       name: new Field({
         name: 'name',
-        value: '',
+        value: data.name,
         validators: [errors.required()],
       }),
       address: new Field({
         name: 'address',
-        value: '',
+        value: data.address,
         validators: [errors.required()],
       }),
       phone: new Field({
         name: 'phone',
-        value: '',
+        value: data.phone,
         validators: [errors.required()],
       }),
     })
@@ -36,7 +37,11 @@ class CreateCustomerForm extends React.Component {
 
   submit = (e) => {
     e.preventDefault()
-    this.props.customerStore.addCustomer(this.form.data)
+    if (this.props.data.id) {
+      this.props.customerStore.updateCustomer(this.props.data.id, this.form.data)
+    } else {
+      this.props.customerStore.addCustomer(this.form.data)
+    }
     this.props.modalStore.toggleModal('isOpenCustomer', false)
 
   }
@@ -58,7 +63,8 @@ class CreateCustomerForm extends React.Component {
         />
         <RaisedButton
           type="submit"
-          label="Create"
+          className="submit"
+          label={this.props.data.id ? 'Update' : 'Create'}
           fullWidth
           primary
           disabled={!this.form.isValid}
@@ -67,11 +73,5 @@ class CreateCustomerForm extends React.Component {
     )
   }
 }
-
-CreateCustomerForm.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-CreateCustomerForm.defaultProps = {}
 
 export default CreateCustomerForm

@@ -6,6 +6,7 @@ import {
 import API from '../utils/API'
 import Logger from '../utils/Logger'
 import { ApiRoutes } from '../utils/Constants'
+import { InvoiceItem } from '../models/InvoiceItem'
 
 
 useStrict(true)
@@ -33,6 +34,19 @@ export class MainStore {
   }
 
   @action.bound
+  async fetchInvoiceItems(id) {
+    try {
+      const response = await API.getData(ApiRoutes.invoiceItems.list(id))
+      this.setDerivedData('invoiceItems', response.data.map((item) => {
+        return new InvoiceItem(item)
+      }))
+
+    } catch (error) {
+      Logger.error(error)
+    }
+  }
+
+  @action.bound
   setDerivedData(key, data) {
     this.data[key] = data
   }
@@ -47,6 +61,17 @@ export class MainStore {
   editData(entity, key,  id, data) {
     const editableData = this.data[entity].find((item) => item.id === id)
     editableData[key] = data
+  }
+
+  @action.bound
+  editObject(entity, id, data) {
+    this.data[entity] = this.data[entity].map((item) => {
+      if(item.id === id) {
+        return data
+      } else {
+        return item
+      }
+    })
   }
 
   @action.bound

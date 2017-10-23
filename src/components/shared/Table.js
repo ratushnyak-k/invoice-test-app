@@ -9,10 +9,10 @@ import {
   Table as MUITable,
   TableBody,
   TableRowColumn,
-  TextField,
 } from 'material-ui'
 import EmptyList from './EmptyList'
 import Select from './formComponents/Select'
+import Counter from './formComponents/Counter'
 
 
 @observer
@@ -21,12 +21,8 @@ class Table extends React.Component {
     this.props.selectData.onChange(rowId, value)
   }
 
-  onTextFieldChange(rowId, e, value) {
-    this.props.textFieldData.onChange(rowId, value)
-  }
-
-  onTextFieldBlur(rowId, e) {
-    this.props.textFieldData.onBlur(rowId, +e.target.value)
+  onTextFieldChange(rowId, value) {
+    this.props.counterData.onChange(rowId, value)
   }
 
   renderTableContent(item, data, output) {
@@ -34,7 +30,7 @@ class Table extends React.Component {
       ActionButton,
       onTableAction,
       selectData,
-      textFieldData,
+      counterData,
     } = this.props
 
     switch (item.type) {
@@ -43,13 +39,9 @@ class Table extends React.Component {
           onAction={onTableAction.bind(this, data.id)}
         />
       case 'input':
-        return <TextField
-          type="number"
-          step="1"
-          name={`${data.id}-${data[textFieldData.idKey] || 0}-text-input`}
-          onBlur={this.onTextFieldBlur.bind(this, data.id)}
+        return <Counter
           onChange={this.onTextFieldChange.bind(this, data.id)}
-          value={data[textFieldData.idKey] || 0}
+          value={data[counterData.idKey] || 0}
         />
       case 'select':
         return <Select
@@ -146,10 +138,5 @@ class Table extends React.Component {
   }
 }
 
-Table.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-Table.defaultProps = {}
 
 export default Table

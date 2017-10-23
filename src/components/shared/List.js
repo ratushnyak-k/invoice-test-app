@@ -3,10 +3,9 @@ import {
   inject,
   observer,
 } from 'mobx-react'
-import { string } from 'prop-types'
 
-import Table from '../shared/Table'
-import AddButton from '../shared/buttons/AddButton'
+import Table from './Table'
+import AddButton from './buttons/AddButton'
 import { tablesConfig } from '../../utils/Constants'
 
 @inject('mainStore')
@@ -26,7 +25,7 @@ class List extends React.Component {
       onTableAction,
       title,
       selectData,
-      textFieldData,
+      counterData,
       relatedKey,
     } = this.props
 
@@ -51,18 +50,12 @@ class List extends React.Component {
           tableData={mainStore.data[entity]}
           ActionButton={actionButton}
           selectData={selectData}
-          textFieldData={textFieldData}
+          counterData={counterData}
           relatedKey={relatedKey}
         />
       </div>
     )
   }
 }
-
-List.propTypes = {
-  // optionalString: React.PropTypes.string,
-}
-
-List.defaultProps = {}
 
 export default List
