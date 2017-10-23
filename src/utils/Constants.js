@@ -1,6 +1,6 @@
 const baseUrls = {
   development: 'http://localhost:8000/',
-  production: 'http://localhost:8000/',
+  production: 'https://damp-shore-96607.herokuapp.com/',
 }
 
 const baseServerURLs = () => {
