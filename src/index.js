@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'mobx-react'
 import { MuiThemeProvider } from 'material-ui'
 import {
@@ -33,4 +32,3 @@ ReactDOM.render(
       />
     </MuiThemeProvider>
   </Provider>, document.getElementById('root'));
-registerServiceWorker();
