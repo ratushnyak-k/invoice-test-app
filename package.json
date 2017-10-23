@@ -30,6 +30,6 @@
     "prop-types": "latest"
   },
   "engines": {
-    "node": "6.2.0"
+    "node": ">=6.2.0"
   }
 }
